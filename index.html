@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Anmeldeformular</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Anmeldeformular</h1>
+        <form action="#" method="get" id="anmeldung">
+            <label for="vorname">Vorname:</label><br>
+            <input type="text" id="vorname" name="vorname" required><br><br>
+
+            <select id="Klasse" name="Klasse" required>
+                <option value="10A">1 AHIT</option>
+                <option value="10B">2 AHIT</option>
+                <option value="11A">3 AHIT</option>
+                <option value="11B">4 AHIT</option>
+                <option value="12A">5 AHIT</option>
+            </select><br><br>
+
+            <label for="Geburtsdatum">Geburtsdatum:</label><br>
+            <input type="date" id="Geburtsdatum" name="Geburtsdatum" required><br><br>
+
+            <label for="workshop">1. Workshop:</label><br>
+            <input type="radio" id="Workshop1" name="Workshop1" value="Webdesign" required><label for="Workshop">Webdesign</label><br>
+            <input type="radio" id="Workshop1" name="Workshop1" value="Robotik" required><label for="Workshop">Robotik</label><br>
+            <input type="radio" id="Workshop1" name="Workshop1" value="Fotografie" required><label for="Workshop">Fotografie</label><br>
+            <input type="radio" id="Workshop1" name="Workshop1" value="Kochen" required><label for="Workshop">Kochen</label><br><br>
+
+            <select id="Zeitwunsch1" name="Zeitwunsch1" required>
+                <option value="10:00-12:00">10:00-12:00</option>
+                <option value="12:00-14:00">12:00-14:00</option>
+                <option value="14:00-16:00">14:00-16:00</option>
+            </select><br><br>
+
+            <label for="workshop">2. Workshop:</label><br>
+            <input type="radio" id="Workshop2" name="Workshop2" value="Webdesign" required><label for="Workshop">Webdesign</label><br>
+            <input type="radio" id="Workshop2" name="Workshop2" value="Robotik" required><label for="Workshop">Robotik</label><br>
+            <input type="radio" id="Workshop2" name="Workshop2" value="Fotografie" required><label for="Workshop">Fotografie</label><br>
+            <input type="radio" id="Workshop2" name="Workshop2" value="Kochen" required><label for="Workshop">Kochen</label><br><br>
+
+            <select id="Zeitwunsch2" name="Zeitwunsch2" required>
+                <option value="10:00-12:00">10:00-12:00</option>
+                <option value="12:00-14:00">12:00-14:00</option>
+                <option value="14:00-16:00">14:00-16:00</option>
+            </select><br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="telefon">Telefonnummer:</label><br>
+            <input type="tel" id="telefon" name="telefon" required><br><br>
+
+            <label for="Anmerkungen">Anmerkungen:</label><br>
+            <textarea id="Anmerkungen" name="Anmerkungen" rows="4" cols="50"></textarea><br><br>
+
+            <input type="checkbox" id="Datenschutz" name="Datenschutz" required>
+            <label for="Datenschutz">Ich habe die Teilnahmebedingungen gelesen</label><br><br>
+
+            <input type="submit" value="Anmelden">
+        </form>
+        <p id="bestaetigung"></p>
+
+        <script>
+            const formular = document.getElementById("anmeldung");
+
+            formular.addEventListener("submit", function (event) {
+                event.preventDefault(); // Seite nicht neu laden
+
+                const vorname = document.getElementById("vorname").value;
+                const workshop1 = document.querySelector('input[name="Workshop1"]:checked').value;
+                const workshop2 = document.querySelector('input[name="Workshop2"]:checked').value;
+                const workshop = workshop1 + " und " + workshop2;
+                const klasse = document.getElementById("Klasse").value;
+                const ersterzeitwunsch = document.getElementById("Zeitwunsch1").value;
+                const zweiterzeitwunsch = document.getElementById("Zeitwunsch2").value;
+                const zeitwunsch = ersterzeitwunsch + " und " + zweiterzeitwunsch;
+                const formular = document.getElementById("anmeldung");
+                const element = document.getElementById("bestaetigung");
+
+                if (ersterzeitwunsch == zweiterzeitwunsch) {
+                    element.textContent = "Bitte wähle unterschiedliche Zeitwünsche für die Workshops.";
+                    element.style.color = "red";
+                    return;
+                }
+
+                formular.style.display = "none";
+
+                document.getElementById("bestaetigung").textContent =
+                    "Danke, " + vorname + "! Du bist für den Workshop " + workshop + " um " + zeitwunsch + " in der Klasse " + klasse + " angemeldet.";
+                element.style.color = "green";
+            });
+        </script>
+    </body>
+</html>
